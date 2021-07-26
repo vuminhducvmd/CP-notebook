@@ -1,2 +1,2 @@
-# CP-code
-CP code
+# CP-notebook
+CP notebook

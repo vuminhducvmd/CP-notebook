@@ -7,12 +7,9 @@ using namespace std;
 #define lb lower_bound
 #define ub upper_bound
 #define bit(x, i) ((x>>i)&1)
-#define x real()
-#define y imag()
  
 typedef long long ll;
 typedef long double ld;
-typedef complex<ll> pt;
  
 const ld EPS=0.00000001;
 const ll INF=1e18;

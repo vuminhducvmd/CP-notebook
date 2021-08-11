@@ -21,7 +21,7 @@ int n, s, l, a[100005], lg[100005], st[100005][23];
 
 int calc(int x, int y) {
     int loga = lg[y - x + 1];
-    return mã(st[x][loga], st[y - (1 << loga) + 1][loga]);
+    return max(st[x][loga], st[y - (1 << loga) + 1][loga]);
 }
 
 signed main() {

@@ -1,0 +1,69 @@
+//CF 600E
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define pb push_back
+#define st first
+#define nd second
+#define lb lower_bound
+#define ub upper_bound
+#define bit(x, i) ((x>>i)&1)
+ 
+typedef long long ll;
+typedef long double ld;
+typedef complex<ll> pt;
+ 
+const ld EPS = 0.00000001;
+const ll INF = 1e18;
+const ll mod = 1e9+7;
+
+#define int ll
+
+int n, ans[100005], sum[100005], cur[100005];
+vector<int> g[100005];
+map<int, int> mp[100005];
+
+void dfs(int u, int  p = -1) {
+    for(int v : g[u]) {
+        if(v == p) continue;
+        dfs(v, u);
+        if(mp[u].size() < mp[v].size()) {
+            swap(mp[u], mp[v]);
+            swap(cur[u], cur[v]);
+            swap(sum[u], sum[v]);
+        }
+        for(auto p : mp[v]) {
+            mp[u][p.st] += p.nd;
+            if(mp[u][p.st] > cur[u]) {
+                sum[u] = p.st;
+                cur[u] = mp[u][p.st];
+            }
+            else if(mp[u][p.st] == cur[u]) sum[u] += p.st;
+        }
+    }
+    ans[u] = sum[u];
+}
+
+signed main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    
+    cin >> n;
+    for(int i = 1, x; i <= n; ++ i) {
+        cin >> x;
+        sum[i] = x;
+        ++mp[i][x];
+        cur[i] = 1;
+    }
+    for(int i = 1, u, v; i < n; ++i) {
+        cin >> u >> v;
+        g[u].pb(v);
+        g[v].pb(u);
+    }
+    dfs(1);
+    for(int i = 1; i <= n; ++i) {
+        cout << ans[i] << " ";
+    }
+    
+	return 0;
+}
